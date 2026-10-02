@@ -21,14 +21,20 @@ Rather than acting as open-ended conversational chatbots, agents executing these
 
 ```
 autonomous-agent-prompts/
-├── bugzappa-bug-hunter.prompt.md           # BugZappa: Bug hunting & reliability sweeps
-├── depkeeper-dependency-updater.prompt.md  # DepKeeper: Full dependency maintenance & security upgrades
+├── bugzappa-bug-hunter.prompt.md                    # BugZappa: Bug hunting & reliability sweeps
+├── depkeeper-dependency-updater.prompt.md           # DepKeeper: Full dependency maintenance & security upgrades
 ├── google-jules/
-│   └── sentinel-security-scanner.prompt.md # Sentinel: Security vulnerability sweeps (Google Jules)
+│   ├── bolt-performance-optimization.prompt.md      # Bolt: Performance optimization sweeps (Google Jules)
+│   ├── curator-dependency-hygiene.prompt.md         # Curator: Dependency & build hygiene (Google Jules)
+│   ├── gardener-cleanup-hygiene.prompt.md           # Gardener: Cleanup & technical maintenance (Google Jules)
+│   ├── inspector-test-improvements.prompt.md        # Inspector: Test improvements & regression defense (Google Jules)
+│   ├── palette-ux-focused-a11y.prompt.md            # Palette: Micro-UX & accessibility enhancements (Google Jules)
+│   ├── sentinel-security-scanner.prompt.md          # Sentinel: Security vulnerability sweeps (Google Jules)
+│   └── steward-code-quality-maintainability.prompt.md # Steward: Code quality & maintainability (Google Jules)
 ├── external/
-│   └── qa-an-agents-tests.prompt.md        # QA the Tests an Agent Wrote: Mutation-based test suite auditor
+│   └── qa-an-agents-tests.prompt.md                 # QA the Tests an Agent Wrote: Mutation-based test suite auditor
 └── docs/
-    └── superpowers/plans/                  # Implementation plans & engineering records
+    └── superpowers/plans/                           # Implementation plans & engineering records
 ```
 
 ### Prompt Inventory
@@ -37,7 +43,13 @@ autonomous-agent-prompts/
 | :--- | :--- | :--- | :--- |
 | **[`bugzappa-bug-hunter.prompt.md`](./bugzappa-bug-hunter.prompt.md)** | **BugZappa** 💥 | Multi-harness (Jules, Claude Code, Cursor, etc.) | **Bug Hunting & Code Reliability:** Hunts down runtime crashes, unhandled exceptions/promises, logic bugs, off-by-one errors, race conditions, resource leaks, and missing error boundaries. Delivers surgical fixes in `< 50 lines`. |
 | **[`depkeeper-dependency-updater.prompt.md`](./depkeeper-dependency-updater.prompt.md)** | **DepKeeper** 📦 | Multi-harness (Jules, Claude Code, Cursor, etc.) | **Comprehensive Dependency Updates:** Upgrades outdated npm/pnpm/yarn/bun and Python dependencies, remediates known security alerts, updates lockfiles in tandem, and verifies zero build/test regressions. |
+| **[`google-jules/bolt-performance-optimization.prompt.md`](./google-jules/bolt-performance-optimization.prompt.md)** | **Bolt** ⚡ | Google Jules (scheduled agent) | **Performance Optimization:** Identifies and implements surgical performance wins (`< 50 lines`) to eliminate unnecessary re-renders, add memoization, index queries, and optimize rendering. |
+| **[`google-jules/curator-dependency-hygiene.prompt.md`](./google-jules/curator-dependency-hygiene.prompt.md)** | **Curator** 📦 | Google Jules (scheduled agent) | **Dependency & Build Hygiene:** Keeps dependencies lean, aligns versions across packages, prunes unused packages, and streamlines build configuration in `< 50 lines`. |
+| **[`google-jules/gardener-cleanup-hygiene.prompt.md`](./google-jules/gardener-cleanup-hygiene.prompt.md)** | **Gardener** 🌱 | Google Jules (scheduled agent) | **Cleanup & Technical Maintenance:** Removes dead code and unused imports, cleans up technical clutter, and improves maintainability in `< 50 lines`. |
+| **[`google-jules/inspector-test-improvements.prompt.md`](./google-jules/inspector-test-improvements.prompt.md)** | **Inspector** 🧪 | Google Jules (scheduled agent) | **Testing & Regression Defense:** Adds missing unit/integration tests for critical edge cases, strengthens assertions, and fixes flaky tests in `< 50 lines`. |
+| **[`google-jules/palette-ux-focused-a11y.prompt.md`](./google-jules/palette-ux-focused-a11y.prompt.md)** | **Palette** 🎨 | Google Jules (scheduled agent) | **UX & Accessibility Polish:** Identifies and implements micro-UX improvements (`< 50 lines`) including ARIA labels, focus states, keyboard navigation, color contrast, and empty states. |
 | **[`google-jules/sentinel-security-scanner.prompt.md`](./google-jules/sentinel-security-scanner.prompt.md)** | **Sentinel** 🛡️ | Google Jules (scheduled agent) | **Vulnerability & Security Sweeps:** Hunts down hardcoded secrets, injection vectors, authorization flaws, CSRF/XSS, insecure dependencies, and security misconfigurations. |
+| **[`google-jules/steward-code-quality-maintainability.prompt.md`](./google-jules/steward-code-quality-maintainability.prompt.md)** | **Steward** 🧹 | Google Jules (scheduled agent) | **Code Quality & Maintainability:** Refactors complex functions, enforces single-responsibility boundaries, clarifies naming, and reduces technical debt in `< 50 lines`. |
 | **[`external/qa-an-agents-tests.prompt.md`](./external/qa-an-agents-tests.prompt.md)** | **QA the Tests an Agent Wrote** | Harness-Agnostic (External / Community) | **Test Suite Verification & Defect Injection:** Audits agent-authored test suites by mutating code and putting defects back to identify and eliminate tests that cannot fail. Sourced from [wecanuseai.com](https://jules-prompts.wecanuseai.com/prompts/task_qa_an_agents_tests.html). |
 
 ---
@@ -80,7 +92,7 @@ flowchart TD
 While many prompts include Google Jules conventions (such as `.jules/` journal tracking and PR formats), they are designed to be readily adaptable across any modern autonomous coding agent harness:
 
 ### 1. Google Jules
-- **Setup:** Select the prompt (e.g. [`bugzappa-bug-hunter.prompt.md`](./bugzappa-bug-hunter.prompt.md), [`depkeeper-dependency-updater.prompt.md`](./depkeeper-dependency-updater.prompt.md), or [`google-jules/sentinel-security-scanner.prompt.md`](./google-jules/sentinel-security-scanner.prompt.md)) and paste into Jules' agent instructions.
+- **Setup:** Select any persona prompt (e.g. [`bugzappa-bug-hunter.prompt.md`](./bugzappa-bug-hunter.prompt.md), [`depkeeper-dependency-updater.prompt.md`](./depkeeper-dependency-updater.prompt.md), or any prompt under [`google-jules/`](./google-jules/)) and paste into Jules' agent instructions.
 - **Workflow:** Configure scheduled recurring scans (e.g., daily bug hunting or weekly dependency sweeps) or trigger on-demand.
 - **Journaling:** Jules persists learnings across runs in `.jules/<agent-name>.md`.
 
@@ -102,4 +114,7 @@ While many prompts include Google Jules conventions (such as `.jules/` journal t
 
 - **Google Jules Web App:** [https://jules.google.com](https://jules.google.com) (also accessible at [https://jules.google](https://jules.google/))
 - **Google Jules Official Documentation:** [https://jules.google/docs](https://jules.google/docs)
+- **Google Jules Scheduled Tasks Guide:** [https://jules.google/docs/scheduled-tasks/](https://jules.google/docs/scheduled-tasks/)
+- **10 Jules Scheduled Agents by Karol Binkowski:** [https://karolbinkow.ski/resources/jules/](https://karolbinkow.ski/resources/jules/)
+- **Awesome Jules Prompts:** [https://github.com/google-labs-code/jules-awesome-list](https://github.com/google-labs-code/jules-awesome-list)
 - **External Community Prompts:** [Jules Prompts at wecanuseai.com](https://jules-prompts.wecanuseai.com/prompts/task_qa_an_agents_tests.html)
