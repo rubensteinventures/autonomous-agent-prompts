@@ -103,5 +103,3 @@ While many prompts include Google Jules conventions (such as `.jules/` journal t
 - **Google Jules Web App:** [https://jules.google.com](https://jules.google.com) (also accessible at [https://jules.google](https://jules.google/))
 - **Google Jules Official Documentation:** [https://jules.google/docs](https://jules.google/docs)
 - **External Community Prompts:** [Jules Prompts at wecanuseai.com](https://jules-prompts.wecanuseai.com/prompts/task_qa_an_agents_tests.html)
-
-# autonomous-agent-prompts
